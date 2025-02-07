@@ -1307,7 +1307,7 @@ H.setup_repo_watch = function(buf_id, repo)
     local on_change = vim.schedule_wrap(function() H.on_repo_change(repo) end)
     local watch = function(_, filename, _)
       -- Ignore temporary changes
-      if vim.endswith(filename, 'lock') then return end
+      if filename == nil or vim.endswith(filename, 'lock') then return end
 
       -- Debounce to not overload during incremental staging (like in script)
       timer:stop()
